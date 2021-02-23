@@ -116,4 +116,10 @@ public class ProductServiceIntegrationTests {
 
         productService.deleteProduct(4000);
     }
+
+    @Test
+    public void testDeleteAllProducts_whenValidRequest_thenDeleteAllProductsFromDatabase() {
+
+        productService.deleteAllProducts();
+    }
 }
