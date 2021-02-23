@@ -1,6 +1,7 @@
 package com.example.onlineshop.service;
 
 import com.example.onlineshop.domain.Product;
+import com.example.onlineshop.exceptions.ResourceNotFoundException;
 import com.example.onlineshop.persistence.ProductRepository;
 import com.example.onlineshop.transfer.SaveProductRequest;
 import org.slf4j.Logger;
@@ -32,5 +33,13 @@ public class ProductService {
         product.setImagePath(request.getImagePath());
 
         return productRepository.save(product);
+    }
+
+    public Product getProduct(long id) {
+
+        LOGGER.info("Retrieving product with id: {}", id);
+
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product " + id + " not found."));
+
     }
 }
