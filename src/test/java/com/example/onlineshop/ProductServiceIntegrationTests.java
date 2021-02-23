@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -91,5 +92,28 @@ public class ProductServiceIntegrationTests {
         SaveProductRequest request = new SaveProductRequest();
 
         productService.updateProduct(9999, request);
+    }
+
+    @Test
+    public void testDeleteProduct_whenMultipleExistingProducts_thenDeleteTheRightProduct() {
+
+        Product createdProduct = productSteps.createProduct();
+        Product createdProduct2 = productSteps.createProduct();
+
+        productService.deleteProduct(createdProduct.getId());
+        Product productInDb = productService.getProduct(createdProduct2.getId());
+        assertThat(productInDb, notNullValue());
+        assertThat(productInDb.getId(), is(createdProduct2.getId()));
+        assertThat(productInDb.getName(), is(createdProduct2.getName()));
+        assertThat(productInDb.getDescription(), is(createdProduct2.getDescription()));
+        assertThat(productInDb.getPrice(), is(createdProduct2.getPrice()));
+        assertThat(productInDb.getQuantity(), is(createdProduct2.getQuantity()));
+        assertThat(productInDb.getImagePath(), is(createdProduct2.getImagePath()));
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void testDeleteProduct_whenNonExistingProduct_thenThrowException() {
+
+        productService.deleteProduct(4000);
     }
 }
