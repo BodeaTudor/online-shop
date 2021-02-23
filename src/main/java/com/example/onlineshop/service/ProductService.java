@@ -80,4 +80,11 @@ public class ProductService {
 
         productRepository.deleteById(id);
     }
+
+    public void deleteAllProducts() {
+
+        LOGGER.info("Deleting products...");
+
+        productRepository.deleteAll();
+    }
 }
