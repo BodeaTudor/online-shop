@@ -3,6 +3,7 @@ package com.example.onlineshop.web;
 import com.example.onlineshop.domain.Product;
 import com.example.onlineshop.service.ProductService;
 import com.example.onlineshop.transfer.product.GetProductsRequest;
+import com.example.onlineshop.transfer.product.ProductResponse;
 import com.example.onlineshop.transfer.product.SaveProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,9 +42,9 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> getProducts(GetProductsRequest request, Pageable pageable) {
+    public ResponseEntity<Page<ProductResponse>> getProducts(GetProductsRequest request, Pageable pageable) {
 
-        Page<Product> products = productService.getProducts(request, pageable);
+        Page<ProductResponse> products = productService.getProducts(request, pageable);
 
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
@@ -64,11 +65,4 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping()
-    public ResponseEntity deleteAllProducts() {
-
-        productService.deleteAllProducts();
-
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
 }
