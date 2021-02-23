@@ -6,6 +6,7 @@ import com.example.onlineshop.persistence.ProductRepository;
 import com.example.onlineshop.transfer.SaveProductRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,16 @@ public class ProductService {
 
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product " + id + " not found."));
 
+    }
+
+    public Product updateProduct(long id, SaveProductRequest request) {
+
+        LOGGER.info("Updating product with id {}: {}", id, request);
+
+        Product product = getProduct(id);
+
+        BeanUtils.copyProperties(request, product);
+
+        return productRepository.save(product);
     }
 }
