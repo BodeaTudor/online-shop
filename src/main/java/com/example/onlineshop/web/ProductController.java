@@ -6,10 +6,7 @@ import com.example.onlineshop.transfer.SaveProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -30,5 +27,13 @@ public class ProductController {
         Product createdProduct = productService.createProduct(request);
 
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable("id") long id) {
+
+        Product product = productService.getProduct(id);
+
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }
