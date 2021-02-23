@@ -2,7 +2,7 @@ package com.example.onlineshop.steps;
 
 import com.example.onlineshop.domain.Product;
 import com.example.onlineshop.service.ProductService;
-import com.example.onlineshop.transfer.SaveProductRequest;
+import com.example.onlineshop.transfer.product.SaveProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

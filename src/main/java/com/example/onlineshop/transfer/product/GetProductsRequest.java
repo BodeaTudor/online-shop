@@ -1,4 +1,4 @@
-package com.example.onlineshop.transfer;
+package com.example.onlineshop.transfer.product;
 
 import lombok.Data;
 

@@ -4,7 +4,7 @@ import com.example.onlineshop.domain.Product;
 import com.example.onlineshop.exceptions.ResourceNotFoundException;
 import com.example.onlineshop.service.ProductService;
 import com.example.onlineshop.steps.ProductSteps;
-import com.example.onlineshop.transfer.SaveProductRequest;
+import com.example.onlineshop.transfer.product.SaveProductRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
