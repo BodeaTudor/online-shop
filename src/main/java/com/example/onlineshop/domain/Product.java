@@ -2,11 +2,10 @@ package com.example.onlineshop.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -30,4 +29,7 @@ public class Product {
 
     @NotNull
     private String imagePath;
+
+    @ManyToMany(mappedBy = "products")
+    private Set<Cart> carts = new HashSet<>();
 }
