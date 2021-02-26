@@ -86,7 +86,7 @@ public class ProductService {
 
         LOGGER.info("Retrieving product with id: {}", id);
 
-        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product " + id + " not found."));
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found."));
 
     }
 
